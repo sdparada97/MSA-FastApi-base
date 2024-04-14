@@ -1,17 +1,25 @@
 [tool.poetry]
 name = "msa-fastapi-base"
 version = "0.1.0"
-description = "Base app by MSA with FastApi"
+description = "Template to create MSA with FastAPI"
 authors = ["sdparada97 <sdparada97@gmail.com>"]
-license = "MIT"
 readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.10"
-fastapi = "^0.110.0"
-uvicorn = {extras = ["standard"], version = "^0.29.0"}
-flake8 = "^7.0.0"
+fastapi = "^0.110.1"
+uvicorn = "^0.29.0"
+sqlalchemy = "^2.0.29"
+asyncpg = "^0.29.0"
+python-dotenv = "^1.0.1"
+alembic = "^1.13.1"
 
+
+[tool.poetry.group.dev.dependencies]
+black = "^24.4.0"
+flake8 = "^7.0.0"
+pytest = "^8.1.1"
+pytest-asyncio = "^0.23.6"
 
 [build-system]
 requires = ["poetry-core"]

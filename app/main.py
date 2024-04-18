@@ -5,6 +5,7 @@ from app.routes import examples
 # Application starts
 app = FastAPI(
     title="Microservice Template",
+    debug=True
 )
 
 # Include routers

@@ -12,11 +12,11 @@ logger.add(
     enqueue=True,
     backtrace=True,
     diagnose=True,
-    colorize=True
+    colorize=True,
 )
 
 logger.add(
-    "logs/log_trace_{time}.log",
+    "logs/log_trace_{time:YYYY-MM-DD}.log",
     rotation="00:00",
     retention="10 days",
     format="[ {time:YYYY-MM-DD HH:mm:ss} ] [ {level} ] {message}",
@@ -27,7 +27,7 @@ logger.add(
 )
 
 logger.add(
-    "logs/log_error_{time}.log",
+    "logs/log_error_{time:YYYY-MM-DD}.log",
     rotation="00:00",
     retention="10 days",
     format="[ {time:YYYY-MM-DD HH:mm:ss} ] [ {level} ] {message}",

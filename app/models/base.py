@@ -1,32 +1,24 @@
-from sqlalchemy import DateTime, MetaData, text
-from sqlalchemy.dialects.postgresql import UUID
-from sqlalchemy.sql import func
-from sqlalchemy.orm import Mapped, mapped_column
-from app.database import Base
+import sqlalchemy as sa
+from datetime import datetime, timezone
+from sqlmodel import SQLModel, Field
+import uuid as uuid_pkg
 
 
-class OrmBase(Base):
-    metadata = MetaData()
-
-
-class UUIDModel(Base):
-    __abstract__ = True
-    uuid: Mapped[UUID] = mapped_column(
-        UUID(as_uuid=True),
+class UUIDModel(SQLModel, abstract=True):
+    uuid: uuid_pkg.UUID = Field(
+        default_factory=uuid_pkg.uuid4,
         primary_key=True,
-        server_default=text("gen_random_uuid()"),
-        unique=True,
-    )
-
-
-class TimestampModel(Base):
-    __abstract__ = True
-    created_at: Mapped[DateTime] = mapped_column(
-        DateTime, server_default=func.current_timestamp(), nullable=False
-    )
-    updated_at: Mapped[DateTime] = mapped_column(
-        DateTime,
-        server_default=func.current_timestamp(),
-        onupdate=func.current_timestamp(),
+        index=True,
         nullable=False,
+    )
+
+
+class TimestampModel(SQLModel, abstract=True):
+    created_at: datetime = Field(
+        sa_column=sa.Column(sa.DateTime(timezone=True), nullable=False),
+        default_factory=lambda: datetime.now(timezone.utc),
+    )
+    updated_at: datetime = Field(
+        sa_column=sa.Column(sa.DateTime(timezone=True), nullable=False),
+        default_factory=lambda: datetime.now(timezone.utc),
     )

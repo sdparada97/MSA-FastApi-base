@@ -1,1 +1,1 @@
-
+from .example import ExampleModel

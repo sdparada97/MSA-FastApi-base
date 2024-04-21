@@ -1,10 +1,9 @@
-from sqlalchemy import String, Integer
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlmodel import Field
 from app.models.base import UUIDModel, TimestampModel
 
 
-class ExampleModel(UUIDModel, TimestampModel):
+class ExampleModel(UUIDModel, TimestampModel, table=True):
     __tablename__ = "example_model"
-    name: Mapped[String] = mapped_column(String(100), nullable=False)
-    age: Mapped[Integer] = mapped_column(Integer, nullable=False)
-    description: Mapped[String] = mapped_column(String(255), nullable=True)
+    name: str = Field(max_length=100, nullable=False)
+    age: int = Field(nullable=False)
+    description: str = Field(max_length=255, nullable=True)

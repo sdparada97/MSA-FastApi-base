@@ -1,5 +1,6 @@
 from sqlmodel import Field
-from app.models.base import UUIDModel, TimestampModel
+
+from app.models.base import TimestampModel, UUIDModel
 
 
 class ExampleModel(UUIDModel, TimestampModel, table=True):

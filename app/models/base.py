@@ -1,7 +1,8 @@
-import sqlalchemy as sa
-from datetime import datetime, timezone
-from sqlmodel import SQLModel, Field
 import uuid as uuid_pkg
+from datetime import datetime, timezone
+
+import sqlalchemy as sa
+from sqlmodel import Field, SQLModel
 
 
 class UUIDModel(SQLModel, abstract=True):

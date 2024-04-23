@@ -4,16 +4,28 @@
 DOCKER_COMPOSE = docker-compose
 
 # Construye la imagen Docker
-build:
+build-server:
 	$(DOCKER_COMPOSE) build
 
+build-local:
+	$(DOCKER_COMPOSE) --env-file .env.dev build --no-cache
+
 # Inicia los contenedores
-up:
+up-server:
 	$(DOCKER_COMPOSE) up -d
 
+up-local:
+	$(DOCKER_COMPOSE) --env-file .env.dev up -d
+
 # Detiene y elimina los contenedores
-down:
+down-server:
 	$(DOCKER_COMPOSE) down
+
+down-local:
+	$(DOCKER_COMPOSE) --env-file .env.dev down
+
+clear:
+	docker system prune -a
 
 define make_migrations
 if [ -z "$(message)" ]; then \

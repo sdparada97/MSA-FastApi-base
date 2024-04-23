@@ -1,7 +1,7 @@
 .idea
 .ipynb_checkpoints
 .mypy_cache
-.vscode 
+.vscode
 __pycache__
 .pytest_cache
 htmlcov
@@ -16,6 +16,8 @@ log.txt
 Pipfile.lock
 env3.*
 env
+.env.dev
+.env.prod
 docs_build
 site_build
 venv

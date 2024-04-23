@@ -1,11 +1,13 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from app.routes import examples
+
+from app.routes.api_router import api_router
+from app.settings import settings
 
 # Application starts
-app = FastAPI(title="Microservice Template", debug=True)
-
-app.include_router(examples.router, prefix="/api")
+app = FastAPI(
+    title=settings.PROJECT_NAME, debug=settings.DEBUG, description=settings.DESCRIPTION, version=settings.VERSION
+)
 
 origins = ["*"]
 
@@ -17,6 +19,8 @@ app.add_middleware(
     allow_headers=["*"],
     max_age=3600,
 )
+
+app.include_router(api_router)
 
 
 @app.get("/")

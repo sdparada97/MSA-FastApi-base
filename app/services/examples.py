@@ -1,7 +1,7 @@
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.schemas.example import ExampleOut
 from app.repositories import example
+from app.schemas.example import ExampleOut
 
 
 class ExampleService:

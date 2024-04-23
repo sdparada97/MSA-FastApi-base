@@ -1,19 +1,21 @@
 from __future__ import with_statement
+
 import asyncio
-from logging.config import fileConfig
 import pathlib
 import sys
+from logging.config import fileConfig
 
+from alembic import context
 from sqlalchemy import pool
 from sqlalchemy.engine import Connection
 from sqlalchemy.ext.asyncio import async_engine_from_config
-from alembic import context
 from sqlmodel import SQLModel
+
 from app.settings import settings
 
 sys.path.append(str(pathlib.Path(__file__).resolve().parents[1]))
 
-from models import *  # necessarily to import something from file where your models are stored
+from models import *  # noqa: F403
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.

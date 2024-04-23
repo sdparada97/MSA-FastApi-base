@@ -1,7 +1,7 @@
-import sys
 import logging
-from loguru import logger
+import sys
 
+from loguru import logger
 
 logger.remove()
 

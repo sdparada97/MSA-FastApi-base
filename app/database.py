@@ -1,8 +1,8 @@
 from sqlalchemy import AsyncAdaptedQueuePool, NullPool
-from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
+from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
 from sqlalchemy.orm import declarative_base, sessionmaker
-from .settings import settings, ModeEnum
 
+from .settings import ModeEnum, settings
 
 DATABASE_URL = settings.DATABASE_URL
 DB_POOL_SIZE = 83
@@ -14,9 +14,9 @@ Base = declarative_base()
 async_engine = create_async_engine(
     DATABASE_URL,
     echo=False,
-    poolclass=NullPool
-    if settings.MODE == ModeEnum.testing
-    else AsyncAdaptedQueuePool,  # Asincio pytest works with NullPool
+    poolclass=(
+        NullPool if settings.MODE == ModeEnum.testing else AsyncAdaptedQueuePool
+    ),  # Asincio pytest works with NullPool
     # pool_size=POOL_SIZE,
     # max_overflow=64,
 )

@@ -9,7 +9,7 @@ app = FastAPI(
     title=settings.PROJECT_NAME, debug=settings.DEBUG, description=settings.DESCRIPTION, version=settings.VERSION
 )
 
-origins = ["*"]
+origins = ["*"]  # CORS HAROLD
 
 app.add_middleware(
     CORSMiddleware,

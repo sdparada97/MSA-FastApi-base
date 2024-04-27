@@ -4,6 +4,7 @@ version = "0.1.0"
 description = "Template to create MSA with FastAPI"
 authors = ["sdparada97 <sdparada97@gmail.com>"]
 readme = "README.md"
+package-mode = false
 
 [tool.black]
 skip-string-normalization = true

@@ -1,0 +1,29 @@
+#!/bin/bash
+
+# Ruta al archivo del mensaje del commit
+COMMIT_MSG_FILE=$1
+
+# Estructura requerida, ahora permite feat, fix o hotfix
+REQUIRED_PATTERN="^(feat|fix|hotfix)\(CAPPS-[0-9]+\): .*"
+
+# Longitud máxima del mensaje
+MAX_LENGTH=100
+
+# Leer el mensaje del commit
+COMMIT_MSG=$(cat $COMMIT_MSG_FILE)
+
+# Verificar la estructura del mensaje
+if ! [[ $COMMIT_MSG =~ $REQUIRED_PATTERN ]]; then
+    echo "Error: El mensaje del commit no cumple con el formato requerido."
+    echo "Info: Siga el siguiente formato 'feat/fix/hotfix(CAPPS-<Número de ticket>): <Mensaje descriptivo>'" 
+    exit 1
+fi
+
+# Verificar la longitud del mensaje
+if [ ${#COMMIT_MSG} -gt $MAX_LENGTH ]; then
+    echo "Error: El mensaje del commit excede la longitud máxima de $MAX_LENGTH caracteres."
+    exit 1
+fi
+
+# Si todo está bien, permitir el commit
+exit 0

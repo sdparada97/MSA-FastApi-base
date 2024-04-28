@@ -5,7 +5,7 @@ services:
       container_name: msa_db
       image: postgres:14
       env_file:
-        - .env
+        - .env.dev
       environment:
         POSTGRES_USER: ${DATABASE_USER?Variable not set}
         POSTGRES_PASSWORD: ${DATABASE_PASSWORD?Variable not set}
@@ -26,6 +26,37 @@ services:
     volumes:
       - .:/app
     env_file:
-      - .env
+      - .env.dev
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.app.rule=Host(`traefik.exampledomain.com`)"
+      - "traefik.http.routers.app.entrypoints=websecure"
+      - "traefik.http.routers.app.tls.certresolver=myresolver"
+      - "traefik.http.middlewares.apikey.headers.customrequestheaders.X-API-Key=your-api-key"
+  traefik:
+    image: traefik:v2.5
+    command:
+      - "--api.insecure=true"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--entrypoints.web.address=:80"
+      - "--entrypoints.websecure.address=:443"
+      - "--certificatesresolvers.myresolver.acme.tlschallenge=true"
+      - "--certificatesresolvers.myresolver.acme.email=sdparada97@gmail.com"
+      - "--certificatesresolvers.myresolver.acme.storage=/letsencrypt/acme.json"
+    ports:
+      - "0.0.0.0:80:80"
+      - "0.0.0.0:443:443"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+      - "./letsencrypt:/letsencrypt"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.traefik.rule=Host(`traefik.exampledomain.com`)"
+      - "traefik.http.routers.traefik.entrypoints=websecure"
+      - "traefik.http.routers.traefik.tls.certresolver=myresolver"
+      - "traefik.http.middlewares.apikey.headers.customrequestheaders.X-API-Key=your-api-key"
 volumes:
   dbdata:
+  letsencrypt:
+

@@ -37,7 +37,7 @@
       - [Corrección de errores:](#corrección-de-errores)
       - [Arreglos urgentes (hotfix):](#arreglos-urgentes-hotfix)
       - [Preparación de una versión para producción:](#preparación-de-una-versión-para-producción)
-    - [:exclamation: lineamentos](#exclamation-lineamentos)
+  - [:exclamation: Convenciones y Flujo de trabajo](#exclamation-convenciones-y-flujo-de-trabajo)
   - [:page\_facing\_up: Recursos](#page_facing_up-recursos)
   - [:camera: Galeria](#camera-galeria)
 
@@ -387,8 +387,28 @@ $ git commit -m "hotfix(CAPPS-<Número>): <Mensaje>"
 
 ***Importante: Antes de realizar cualquier fusión, asegúrate de que tu código esté actualizado con la rama objetivo.***
 
-### :exclamation: lineamentos
+## :exclamation: Convenciones y Flujo de trabajo
 
+![Swagger](/assets/Flujo_de_desarrollo.png)
+
+En ese proyecto se usara las siguientes convenciones para el uso y creación de nuevos requerimientos:
+
+> ***EL USO DEL ESTILO `PEP8` DENTRO DEL PROYECTO ES DE USO OBLIGATORIO***
+
+1. **MODELS:**
+   > Para crear nuevos repositorios de extendera de `UUIDModel` y `TimestampModel` (Segun correspondan) y las nuevas clases que se realizan seran `class <nombre>Model():`.
+
+2. **REPOSITORIES:**
+   > Para crear nuevos repositorios de extendera de `BaseRepository` y las nuevas clases que se realizan seran `class <nombre>Repository():`.
+
+3. **ROUTERS:**
+   > Para crear nueva entidad de rutas crear nuevo archivo y agregar el router dentro de `api_router.py` y agregue ls rutas que sean necesarias por entidad.
+
+4. **SERVICES:**
+   > Para crear nuevos servicios debera de crear los schemas tanto de request como de response y las nuevas clases que se realizan seran `class <nombre>Service():`.
+
+5. **SCHEMAS:**
+   > Para crear nuevos esquemas crear un archivo por entidad y las nuevas clases que se realizan seran `class <nombre>In():` para los esquemas de request `class <nombre>Out():` para los esquemas de response.
 
 
 ##  :page_facing_up: Recursos
